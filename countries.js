@@ -1,4 +1,4 @@
-const countries = [
+let countries = [
   {
     flags: {
       png: "https://flagcdn.com/w320/bf.png",
@@ -8357,55 +8357,78 @@ const countries = [
   },
 ];
 
-for (let i = 0; i < 20; i++) {
-  let elli = document.querySelector(".ul");
+// for (let i = 0; i < 20; i++) {
 
-  let elcountries = document.createElement("li");
+// }
 
-  elcountries.setAttribute("class", "ger");
 
-  let img = document.createElement("img");
+let elli = document.querySelector(".ul");
+let inp = document.querySelector(".inp")
 
-  img.setAttribute("src", countries[i].flags.png);
-
-  let title = document.createElement("h3");
-  title.setAttribute("class", "title");
-  title.textContent = countries[i].name.common;
-
-  let data = document.createElement("dl");
-  data.setAttribute("class", "data");
-
-  let dt = document.createElement("dt");
-  dt.setAttribute("class", "data__dt");
-  dt.textContent = "Population:";
-
-  let datadd = document.createElement("dd");
-  datadd.setAttribute("class", "data__dd");
-  datadd.textContent = countries[i].population;
-
-  let datareg = document.createElement("dt");
-  datareg.setAttribute("class", "data__reg");
-  datareg.textContent = "Region:";
-
-  let datalist = document.createElement("dd");
-  datalist.setAttribute("class", "data__lists");
-  datalist.textContent = countries[i].region;
-
-  let dataCapital = document.createElement("dt");
-  dataCapital.setAttribute("class", "data__capital");
-  dataCapital.textContent = "Capital:";
-  let capital = document.createElement("dd");
-  capital.setAttribute("class", "capital");
-  capital.textContent = countries[i].capital;
-
-  elcountries.appendChild(img);
-  elcountries.appendChild(title);
-  data.appendChild(dt);
-  data.appendChild(datadd);
-  data.appendChild(datareg);
-  data.appendChild(datalist);
-  data.appendChild(dataCapital);
-  data.appendChild(capital);
-  elcountries.appendChild(data);
-  elli.appendChild(elcountries);
+function render(data){
+  elli.innerHTML = ""
+  
+  data.forEach(function (country){
+    let elcountries = document.createElement("li");
+    elcountries.setAttribute("class", "ger");
+  
+    let img = document.createElement("img");
+  
+    img.setAttribute("src", country.flags.png);
+  
+    let title = document.createElement("h3");
+    title.setAttribute("class", "title");
+    title.textContent = country.name.common;
+  
+    let data = document.createElement("dl");
+    data.setAttribute("class", "data");
+  
+    let dt = document.createElement("dt");
+    dt.setAttribute("class", "data__dt");
+    dt.textContent = "Population:";
+  
+    let datadd = document.createElement("dd");
+    datadd.setAttribute("class", "data__dd");
+    datadd.textContent = country.population;
+  
+    let datareg = document.createElement("dt");
+    datareg.setAttribute("class", "data__reg");
+    datareg.textContent = "Region:";
+  
+    let datalist = document.createElement("dd");
+    datalist.setAttribute("class", "data__lists");
+    datalist.textContent = country.region;
+  
+    let dataCapital = document.createElement("dt");
+    dataCapital.setAttribute("class", "data__capital");
+    dataCapital.textContent = "Capital:";
+    let capital = document.createElement("dd");
+    capital.setAttribute("class", "capital");
+    capital.textContent = country.capital;
+  
+    elcountries.appendChild(img);
+    elcountries.appendChild(title);
+    data.appendChild(dt);
+    data.appendChild(datadd);
+    data.appendChild(datareg);
+    data.appendChild(datalist);
+    data.appendChild(dataCapital);
+    data.appendChild(capital);
+    elcountries.appendChild(data);
+    elli.appendChild(elcountries);
+  
+  })
 }
+
+inp.addEventListener("input", function() {
+  let rr = []
+  countries.forEach(function(country) {
+    if(country.name.common.toLowerCase().trim().includes(inp.value.toLowerCase().trim())){
+      rr.push(country) 
+    }
+  })
+  render(rr)
+})
+
+render(countries)
+
